@@ -1,0 +1,32 @@
+
+<h1>My Tasks</h1>
+
+<!--Expand Form Button-->
+<ng-container *ngIf="!viewForm">
+    <button (click)="displayForm()">
+        <img src="./../../../../assets/task/plus.png" 
+            srcset="./../../../../assets/task/plus.png"/>
+    </button>
+</ng-container>
+
+<!--Task Form-->
+<ng-container *ngIf="viewForm">
+    <form [formGroup]="taskForm" method="post">
+        <input type="text" formControlName="title" class="task__input"/>
+        <button (click)="handleForm()">
+            Submit
+        </button>
+        <button (click)="displayForm()">
+            <img src="./../../../../assets/task/close.png" 
+                srcset="./../../../../assets/task/close.png"/>
+        </button>
+    </form>
+</ng-container>
+
+<!--Task List-->
+<ng-container *ngIf="tasks$ | async">
+    <div *ngFor="let task of tasks$ | async">
+        <p>{{ task.title }}</p>
+        <p>{{ task.status }}</p>
+    </div>
+</ng-container>
