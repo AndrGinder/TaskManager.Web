@@ -1,1 +1,18 @@
-<p>object works!</p>
+<div [ngSwitch]="task.status">
+    <button *ngSwitchCase="'Not Completed'" (click)="updateTask('Completed')" 
+        class="btn__submit">
+        <div class="btn__img"></div>
+    </button>
+    <button class="btn__submit" *ngSwitchCase="'Completed'"
+        (click)="updateTask('Not Completed')">
+        <img class="btn__img" src="./../../../../assets/task/done.png" 
+            srcset="./../../../../assets/task/done.png" width="1.2rem" height="1.2rem"/>
+    </button>
+</div>
+<p class="title">{{ task.title }}</p>
+<button class="btn__delete" (click)="deleteTask()">
+    <div>
+        <img class="btn__img" src="./../../../../assets/task/delete.png"
+            srcset="./../../../../assets/task/delete.png" />
+    </div>
+</button>

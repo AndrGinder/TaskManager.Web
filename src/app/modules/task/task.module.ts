@@ -6,13 +6,13 @@ import { TaskObjectComponent } from './object/object.component';
 import { TaskService } from 'src/app/services/task.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TaskListComponent } from './list/list.component';
+import { CreateTaskFormComponent } from './create-form/create-form.component';
 
 @NgModule({
   declarations: [
     TaskPageComponent,
     TaskObjectComponent,
-    TaskListComponent,
+    CreateTaskFormComponent,
   ],
   imports: [
     

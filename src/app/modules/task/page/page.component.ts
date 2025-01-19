@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, } from '@angular/core';
 import { FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { TaskDto } from 'src/app/models/task/taskDto';
-import { TaskForm } from 'src/app/models/task/taskForm';
+import { NewTaskForm } from 'src/app/models/task/newTaskForm';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -13,46 +13,47 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskPageComponent {
 
   public tasks$? : Observable<TaskDto[]>
-  public viewForm = false
-  public taskForm = new FormGroup({
-    title: new FormControl('', [
-      Validators.required, 
-      Validators.minLength(2),
-    ]),
-  })
-  public errors = []
-  private destroy$ = new Subject<void>();
+  private destroy$: Subject<void>
 
-  constructor(private service: TaskService) {}
-
+  constructor(private service: TaskService) {
+    this.destroy$ = new Subject<void>();
+  }
+  
   ngOnInit(): void {
-    this.tasks$ = this.service.getAllTasks().pipe(takeUntil(this.destroy$))
-  }
-
-  public displayForm(){
-    this.viewForm = !this.viewForm
-  }
-
-  public handleForm(){
-    if(!this.taskForm.valid){
-      this.retrieveErrors()
+    //this.tasks$ = this.service.getAllTasks().pipe(takeUntil(this.destroy$))
+    const tasks: TaskDto[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key) {
+        const task = localStorage.getItem(key);
+        if (task) {
+          tasks.push(JSON.parse(task));
+        }
+      }
     }
-    else{
-      this.submitForm()
-    }
+    this.tasks$ = this.service.getAllTasks().pipe(
+      //takeUntil(this.destroy$),
+      map(() => tasks)
+    )
   }
 
-  public submitForm(){
-    const form = this.taskForm.value
-    const body: TaskForm = {
-      title: form.title!.trim()
+  onChange() {
+    //this.tasks$ = this.service.getAllTasks().pipe(takeUntil(this.destroy$))
+    const tasks: TaskDto[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key) {
+        const task = localStorage.getItem(key)!;
+        tasks.push(JSON.parse(task));
+      }
     }
-    this.service.addTask(body)
-    this.ngOnInit()
-  }
+    this.tasks$ = this.service.getAllTasks().pipe(
+      //takeUntil(this.destroy$),
+      map(() => 
+        tasks.filter(task => task.id))
+    )
 
-  public retrieveErrors(){
-    const form = document.querySelectorAll('.task__input')
+    //this.tasks$
   }
 
   ngOnDestroy(): void {

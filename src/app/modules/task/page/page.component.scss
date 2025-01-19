@@ -1,0 +1,18 @@
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafaff;
+    padding: .5rem;
+    gap: 1rem;
+}
+.task{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    margin: .5rem;
+    border-radius: .3rem;
+    transition: .75s;
+    background-color: #fafaff;
+}

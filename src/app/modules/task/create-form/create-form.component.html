@@ -1,0 +1,6 @@
+<form [formGroup]="taskForm" method="post" class="form">
+    <input type="text" formControlName="title" class="form__input" />
+    <button (click)="handleForm()" class="form__btn">
+        Add Task
+    </button>
+</form>
