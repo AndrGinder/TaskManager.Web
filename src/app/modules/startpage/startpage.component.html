@@ -1,10 +1,14 @@
-<div>
-    <h1>Welcome to Task Manager!</h1>
-    <ul>
-        <li>Sign in</li>
-        <li>Sign up</li>
-        <li>
-            <a [routerLink]="">Continue as a guest</a>
+<div class="start">
+    <h1 class="start__title">Welcome to Task Manager!</h1>
+    <ul class="start__list">
+        <li class="start__item">
+            <a class="start__link__primary" [routerLink]="signIn">Sign in</a>
+        </li>
+        <li class="start__item">
+            <a class="start__link__secondary" [routerLink]="signUp">Sign up</a>
+        </li>
+        <li class="start__item">
+            <a class="start__link__secondary" [routerLink]="guest">Continue as a guest</a>
         </li>
     </ul>
 </div>

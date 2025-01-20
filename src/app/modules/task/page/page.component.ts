@@ -1,8 +1,6 @@
 import { Component, } from '@angular/core';
-import { FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { TaskDto } from 'src/app/models/task/taskDto';
-import { NewTaskForm } from 'src/app/models/task/newTaskForm';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -11,6 +9,8 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./page.component.scss']
 })
 export class TaskPageComponent {
+
+  main="/"
 
   public tasks$? : Observable<TaskDto[]>
   private destroy$: Subject<void>

@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./startpage.component.scss']
 })
 export class StartpageComponent {
-
+  signUp = "signup"
+  signIn = "signin"
+  guest = "guest/task"
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: StartpageComponent
   },
   {
-    path: "task",
+    path: "guest/task",
     title: "My Tasks",
     loadChildren: () => import('./modules/task/task.module').then(m => m.TaskModule) 
   },
